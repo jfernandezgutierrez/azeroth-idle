@@ -1,5 +1,5 @@
 import {mkdir,writeFile} from 'node:fs/promises';
-import {createHero,settle,upgradeHero,fighter,fight,generateOffers} from '../engine.js';
+import {createHero,settle,upgradeHero,fighter,fight,generateOffers} from '../game/engine.js';
 const n=Date.parse('2026-11-16T10:00Z'),cases=[],snapshots=[],battles=[];
 const hero=(job='warrior',level=1)=>{const h=createHero('Prueba','horde',job,n,78913);if(level!==1){h.level=level;for(const a of ['strength','dexterity','intellect','stamina'])h[a]=10+2*(level-1);h.luck=5+level-1;h.offers=generateOffers(h,h.offer_seed);}return h;};
 function step(h,action,arg,time=n,seed=123){const result=settle(h,action,arg,time,seed);cases.push({h,action,arg,n:time,seed,expected:result});return result.hero;}

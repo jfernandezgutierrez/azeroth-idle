@@ -2,7 +2,9 @@
 
 ## Orden de instalación
 
-En una instalación vacía, aplicar primero `supabase/schema.sql` y después `supabase/classic_v1.sql`. En el proyecto existente, aplicar solo `classic_v1.sql` después de comprobar el estado y ejecutar las pruebas dentro de una transacción revertida. El archivo se compila con `npm run build:sql` y no se edita manualmente.
+En una instalación vacía, aplicar por orden `supabase/schema.sql`, `supabase/classic_v1.sql` y `supabase/onboarding_v1.sql`. En el proyecto existente, aplicar las actualizaciones necesarias después de comprobar el estado y ejecutar las pruebas dentro de una transacción revertida. El núcleo clásico se compila con `npm run build:sql` y no se edita manualmente.
+
+La guía se aplica siempre después del núcleo clásico. Su función pública delega en una capa de tutorial que conserva las reglas económicas congeladas. No renombra ni modifica el motor `classic-1`. La capa de guía puede repetirse y no crea recompensas ni modifica saldos.
 
 La actualización no elimina realm_heroes ni sobrescribe sus filas. Guarda una copia privada de las partidas iniciales y crea tablas privadas de estado, comandos y movimientos. La conversión se realiza al primer acceso. La API antigua deja de aceptar mutaciones para impedir dos economías independientes.
 

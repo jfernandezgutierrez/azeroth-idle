@@ -24,6 +24,7 @@ Modo práctica: se guarda por navegador, separado del personaje online. Para el 
 - Arena contra NPC, mazmorra progresiva y clasificación online.
 - Cien unidades de aventura por día, repuestas a medianoche de Madrid. Arena de entrenamiento y mazmorras usan esperas independientes.
 - Diseño adaptable a móvil y escritorio.
+- Guía contextual persistente para aceptar una misión, cobrarla y mejorar al héroe. Se puede ocultar y volver a mostrar.
 
 ## Supabase
 
@@ -32,6 +33,8 @@ Proyecto conectado: `zhubckfwdfnuhxwvbgvv`. Configuración pública en `config.j
 `supabase/schema.sql` conserva el esquema inicial. `supabase/classic_v1.sql` es la actualización aditiva del núcleo clásico, generada desde `classic_v1.template.sql` y los catálogos compartidos. La versión nueva guarda estado, comandos y movimientos económicos en `realm_private`, inaccesible directamente al jugador. `realm_command` comprueba identidad, serializa acciones por cuenta y devuelve el resultado guardado cuando se reintenta el mismo identificador. La clasificación solo devuelve nombre, facción, nivel y experiencia.
 
 El cliente anterior debe recargar: no se permite mantener dos economías modificables en paralelo. Las partidas iniciales se convierten al acceder y se conserva una copia privada previa. La práctica también se convierte sin reiniciar oro ni propiedad. La semilla de un combate pendiente no se envía al cliente online.
+
+Aplicar `supabase/onboarding_v1.sql` después del núcleo clásico para activar la guía persistente. Esta capa mantiene las reglas `classic-1` y procesa el avance de la guía en la misma transacción que la acción del juego.
 
 Las funciones privilegiadas están en `realm_private`, con search_path vacío, comprobación explícita de auth.uid y permisos de ejecución limitados. Las funciones públicas son envoltorios SECURITY INVOKER. No añadir realm_private a los esquemas expuestos por la API.
 

@@ -10,10 +10,12 @@ Actualizado: 16 de noviembre de 2026.
 - Núcleo clásico v0.2 desarrollado en `1108c69` y completado con pruebas de migración y restricciones de acceso. Cinco atributos, combate por turnos, repetición, ofertas por nivel, aventura diaria y API idempotente. Backend actualizado en Supabase.
 - Veinte pruebas JS correctas. Doce fichas y ofertas, treinta y seis combates y veintiocho acciones coinciden entre JS y SQL. Pruebas de conversión de partida antigua, permisos y reconciliación económica correctas dentro de transacciones revertidas.
 - CI aislado en PostgreSQL 17 correcto en la ejecución `43838688348`, incluida la prueba de doce solicitudes simultáneas con un solo gasto y una sola mejora.
+- Versión v0.2.0 integrada en main y etiquetada en `6d50c62`; segunda verificación completa correcta en `43841048303`.
+- Guía contextual v0.2.1 implementada con progreso persistente y una capa separada que no altera las reglas económicas classic-1. Veintitrés pruebas JS correctas y pruebas SQL específicas de avance, reintentos y conservación de saldo.
 
 ## En curso
 
-Integrar los últimos ajustes de seguridad y documentación en la rama principal, comprobar su CI y etiquetar v0.2.0. No se considera entregado todo el juego ni cerrada la fase F1 mientras falte el tutorial contextual completo.
+Publicar y verificar la guía persistente v0.2.1 en Supabase y GitHub. La fase F1 dispone de sus funciones de núcleo y tutorial; el producto completo todavía requiere las fases restantes.
 
 Revisión en navegador: práctica anterior conservada, cinco atributos visibles, combate de arena, misión aceptada y conservada tras recargar, cobro al finalizar, victoria y nivel 2, nuevas ofertas escaladas y persistencia de la recompensa.
 
@@ -21,7 +23,7 @@ El Word y la planificación ya están subidos en el commit `0352c26`. Su revisi�
 
 ## Siguiente entrega
 
-F1 07: convertir la guía inicial en un recorrido contextual con avance persistente. Después F2 01 a F2 03: objetos como instancias con nivel, rareza y presupuesto, mochila y tiendas persistentes escalables. No iniciar gremios o fortaleza antes de estabilizar esta economía.
+F2 01 a F2 03: objetos como instancias con nivel, rareza y presupuesto, mochila y tiendas persistentes escalables. No iniciar gremios o fortaleza antes de estabilizar esta economía.
 
 ## Límites
 

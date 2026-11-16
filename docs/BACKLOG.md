@@ -14,7 +14,7 @@ Estados: pendiente, en curso, completada. La documentación no cierra tareas de 
 | F1 04 | Completada | Ofertas generadas por nivel | F0 03 | Tres perfiles persistentes y exclusión de nombres recientes |
 | F1 05 | Completada | Aventura diaria y tiempo | F1 04 | Reposición diaria y cambios de hora probados |
 | F1 06 | Completada | Inicio y cobro transaccionales | F1 02 y F1 05 | Contrato, premio único, recibos y prueba paralela |
-| F1 07 | En curso | Tutorial del bucle clásico | F1 06 | Guía inicial disponible; falta recorrido contextual persistente |
+| F1 07 | Completada | Tutorial del bucle clásico | F1 06 | Cuatro pasos persistentes, ocultación, reactivación y reintentos probados |
 | F2 01 | Pendiente | Objetos como instancias | F0 04 | Propiedad, ranuras y mochila probadas |
 | F2 02 | Pendiente | Rarezas y presupuestos | F2 01 | Generación dentro de límites por nivel |
 | F2 03 | Pendiente | Tiendas persistentes | F2 02 | Precios y renovación validados por servidor |
