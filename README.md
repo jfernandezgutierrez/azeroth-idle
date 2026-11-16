@@ -17,18 +17,21 @@ Modo práctica: se guarda por navegador, separado del personaje online. Para el 
 ## Incluido
 
 - Horda en Orgrimmar y Alianza en Ventormenta, con ilustraciones propias generadas.
-- Tres clases, personaje, atributos, entrenamiento, experiencia y niveles.
-- Tres misiones temporizadas persistentes con resultado de combate y recompensas.
+- Tres clases y cinco atributos funcionales, entrenamiento, experiencia y niveles.
+- Tres ofertas de misión generadas por nivel con perfiles de experiencia, oro y exploración. Las ofertas y las condiciones aceptadas son persistentes.
+- Combate automático por turnos con vida, críticos, defensas de clase, furia y repetición guardada.
 - Cuatro objetos, compras, mochila y equipamiento por ranura.
 - Arena contra NPC, mazmorra progresiva y clasificación online.
-- Energía que regenera un punto por minuto y guardado local o en Supabase.
+- Cien unidades de aventura por día, repuestas a medianoche de Madrid. Arena de entrenamiento y mazmorras usan esperas independientes.
 - Diseño adaptable a móvil y escritorio.
 
 ## Supabase
 
 Proyecto conectado: `zhubckfwdfnuhxwvbgvv`. Configuración pública en `config.js`; solo contiene URL y clave publicable. Nunca colocar claves secretas o service_role en el navegador.
 
-`supabase/schema.sql` contiene el esquema instalado. `realm_heroes` tiene RLS: cada usuario puede leer su propia fila. Las escrituras directas están revocadas; todas las acciones pasan por funciones que comprueban identidad, propiedad, precios, energía, temporizadores e inventario. Bloqueo de fila para evitar recompensas duplicadas bajo concurrencia. La clasificación solo devuelve nombre, facción, nivel y experiencia.
+`supabase/schema.sql` conserva el esquema inicial. `supabase/classic_v1.sql` es la actualización aditiva del núcleo clásico, generada desde `classic_v1.template.sql` y los catálogos compartidos. La versión nueva guarda estado, comandos y movimientos económicos en `realm_private`, inaccesible directamente al jugador. `realm_command` comprueba identidad, serializa acciones por cuenta y devuelve el resultado guardado cuando se reintenta el mismo identificador. La clasificación solo devuelve nombre, facción, nivel y experiencia.
+
+El cliente anterior debe recargar: no se permite mantener dos economías modificables en paralelo. Las partidas iniciales se convierten al acceder y se conserva una copia privada previa. La práctica también se convierte sin reiniciar oro ni propiedad. La semilla de un combate pendiente no se envía al cliente online.
 
 Las funciones privilegiadas están en `realm_private`, con search_path vacío, comprobación explícita de auth.uid y permisos de ejecución limitados. Las funciones públicas son envoltorios SECURITY INVOKER. No añadir realm_private a los esquemas expuestos por la API.
 
@@ -36,11 +39,13 @@ Autenticación por correo y contraseña mediante Supabase Auth. Configurar Site 
 
 ## Validación
 
-`npm test` comprueba temporizadores, doble cobro, compra, propiedad, equipo, niveles y regeneración. `npm run check` comprueba sintaxis. Se ejecutaron además pruebas de funciones y permisos en Supabase dentro de transacciones revertidas, sin dejar cuentas de prueba.
+`npm test` comprueba reglas, tiempo, migración, combate, probabilidades y reintentos de conexión. `npm run check` valida sintaxis, importaciones, catálogos y correspondencia del SQL generado. GitHub Actions arranca PostgreSQL 17 aislado, compara resultados JS y SQL, comprueba permisos y ejecuta doce reintentos simultáneos contra el mismo comando. Las pruebas online de Supabase se ejecutan dentro de transacciones revertidas.
+
+Los archivos de `tests/bootstrap.sql` y el script de concurrencia son exclusivamente para la base efímera de CI; no se aplican a Supabase real. Las reglas son propias, versionadas como `classic-1`, y todavía requieren equilibrio con partidas prolongadas.
 
 ## Siguientes etapas
 
-Combate por turnos con habilidades, más clases y razas, inventario ampliado, gremios, PvP real, chat moderado, mascotas, monturas, fortaleza, eventos y economía equilibrada. La suerte se muestra pero aún no interviene en el botín. Los combates actuales se resuelven por poder con variación aleatoria; no hay simulación de turnos. Los sprites son ilustraciones estáticas, no animaciones completas.
+Objetos como instancias con nivel y rareza, tiendas escalables, campañas, más clases y razas, gremios, PvP real, chat moderado, mascotas, monturas, fortaleza y eventos. El catálogo actual conserva cuatro objetos; no se presenta como una economía de equipo completa. Los sprites siguen siendo ilustraciones estáticas y la repetición usa barras de vida y registro de ataques.
 
 ## Recursos visuales
 

@@ -10,17 +10,22 @@ Actualizado: 16 de noviembre de 2026.
 
 ## En curso
 
-Publicar la documentación por petición expresa del usuario. El Word está generado; su revisión visual quedó interrumpida y sigue pendiente. No se considera verificada su maquetación. Después iniciar F0 y el corte vertical de F1 conforme a la instrucción del usuario de continuar el desarrollo.
+Entrega v0.2 del núcleo clásico. Implementados cinco atributos, combate por turnos, repetición, ofertas escaladas persistentes, aventura diaria, conversión de partidas y comandos idempotentes. Veinte pruebas JS correctas. Paridad comprobada en Supabase dentro de transacciones revertidas con doce fichas y ofertas, treinta y seis combates y veintiocho acciones. Pendiente completar CI aislado y publicar el nuevo backend.
+
+Revisión en navegador: práctica anterior conservada, cinco atributos visibles, combate de arena, misión aceptada y conservada tras recargar, cobro al finalizar, victoria y nivel 2, nuevas ofertas escaladas y persistencia de la recompensa.
+
+El Word y la planificación ya están subidos en el commit `0352c26`. Su revisión visual sigue pendiente y no se considera verificada su maquetación.
 
 ## Siguiente entrega
 
-F0 y F1: reglas versionadas, cinco atributos, motor de combate por turnos, ofertas escaladas y persistentes, reserva diaria de aventura y pruebas. Proteger los datos existentes antes de migrarlos y evitar modificaciones irreversibles sin recuperación.
+Completar la publicación y verificación de v0.2. Después F2 01 a F2 03: objetos como instancias con nivel, rareza y presupuesto, mochila y tiendas persistentes escalables. No iniciar gremios o fortaleza antes de estabilizar esta economía.
 
 ## Límites
 
 - No hay versión pública alojada.
 - El registro real de una cuenta por correo no se ha comprobado de principio a fin; las funciones online sí se probaron en transacciones revertidas.
 - No se ha validado carga, restauración de copias ni ritmo de progreso largo.
+- El inventario actual aún tiene cuatro objetos de prototipo. La arena sigue siendo entrenamiento contra NPC.
 - Los sistemas descritos como objetivo en el plan no están implementados salvo indicación expresa.
 
 ## Protocolo de cierre de cada entrega
