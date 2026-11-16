@@ -15,10 +15,12 @@ Actualizado: 16 de noviembre de 2026.
 - Guía desarrollada en `87d8e67`, CI completo correcto en `43842801170` y backend de guía actualizado en Supabase. Pruebas SQL revertidas correctas; la revisión de seguridad no devuelve avisos. No se han dejado cuentas sintéticas en el proyecto.
 - F0 y F1 cerradas como fases de núcleo: no equivalen al lanzamiento del producto completo. F2 a F6 siguen pendientes.
 - Automatización de GitHub actualizada a acciones oficiales v7 fijadas por commit y Ubuntu 24.04, con límite de ejecución y cancelación de comprobaciones sustituidas. Evita depender de la transición automática de ubuntu-latest y del runtime antiguo de las acciones v4.
+- Equipo v0.3 desarrollado en `f68c9e0`; CI completo correcto en `43856398163`. Treinta y siete pruebas JS, comparación JS SQL del motor de equipo y compras paralelas correctas. Backend gear-1 instalado en Supabase, pruebas revertidas correctas y revisión de seguridad sin avisos.
+- Verificación online de permisos: la API anónima, las tablas de auditoría y copias, y los motores anteriores no permiten ejecución o lectura directa del jugador. Las cuentas sintéticas de prueba se revierten y el proyecto sigue sin cuentas reales.
 
 ## En curso
 
-F2 01 a F2 03 en revisión para v0.3.0: instancias de equipo, nivel, cuatro rarezas, diez ranuras según clase, tienda diaria de seis ofertas, mochila de veinte piezas y bandeja de cincuenta. Compra, equipamiento, venta protegida, favoritos, filtros y comparación implementados. Falta completar CI y publicar el nuevo backend.
+Entrega v0.3.0 preparada para integrar en main y etiquetar: instancias de equipo, nivel, cuatro rarezas, diez ranuras según clase, tienda diaria de seis ofertas, mochila de veinte piezas y bandeja de cincuenta. Compra, equipamiento, venta protegida, favoritos, filtros y comparación implementados. CI correcto y backend publicado.
 
 Verificación local: 37 pruebas correctas, incluidos presupuestos de atributos, conversión sin pérdida de estadísticas, escudo equipado, compra repetida, propiedad, favoritos y botín en bandeja. Verificación SQL revertida: 144 objetos, tres conversiones, tres fichas, tres tiendas y 51 acciones coinciden con JS; las pruebas de API y propiedad entre cuentas también pasan.
 
@@ -30,7 +32,7 @@ El Word y la planificación ya están subidos en el commit `0352c26`. Su revisi�
 
 ## Siguiente entrega
 
-Publicar v0.3.0 después de CI. Luego completar F2 04 con reciclaje y política definitiva de bandeja, y continuar F2 05 con campañas y llaves. No iniciar gremios o fortaleza antes de estabilizar esta economía.
+Completar F2 04 con reciclaje y política definitiva de bandeja, y continuar F2 05 con campañas y llaves. Repetir la revisión visual de v0.3 cuando se recupere el navegador. No iniciar gremios o fortaleza antes de estabilizar esta economía.
 
 ## Límites
 
