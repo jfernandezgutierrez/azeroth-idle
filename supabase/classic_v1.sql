@@ -31,6 +31,13 @@ alter table realm_private.commands enable row level security;
 alter table realm_private.ledger enable row level security;
 alter table realm_private.legacy_snapshot enable row level security;
 revoke all on realm_private.characters,realm_private.commands,realm_private.ledger,realm_private.legacy_snapshot from public,anon,authenticated;
+do $policies$ declare table_name text;begin
+ foreach table_name in array array['characters','commands','ledger','legacy_snapshot'] loop
+  if not exists(select 1 from pg_catalog.pg_policies p where p.schemaname='realm_private' and p.tablename=table_name and p.policyname='no_direct_player_access') then
+   execute format('create policy no_direct_player_access on realm_private.%I for all to anon,authenticated using(false) with check(false)',table_name);
+  end if;
+ end loop;
+end $policies$;
 
 create or replace function realm_private.c1_catalog() returns jsonb
 language sql immutable security invoker set search_path='' as $$select $catalog${"rules":{"version":"classic-1","schema":2,"timezone":"Europe/Madrid","adventure":100,"secondsPerAdventure":30,"maxTurns":200,"arenaCooldown":600000,"dungeonCooldown":3600000},"jobs":{"warrior":{"primary":"strength","health":5,"damage":1,"armor":0.2,"armorCap":0.5,"block":0.25,"evade":0},"ranger":{"primary":"dexterity","health":4,"damage":1.15,"armor":0.12,"armorCap":0.25,"block":0,"evade":0.35},"mage":{"primary":"intellect","health":2,"damage":1.8,"armor":0.05,"armorCap":0.1,"block":0,"evade":0}},"items":[{"id":0,"name":"Hacha del veterano","slot":"weapon","icon":6,"power":5,"cost":100},{"id":1,"name":"Coraza de la frontera","slot":"armor","icon":7,"power":4,"cost":85},{"id":2,"name":"Báculo de las brasas","slot":"weapon","icon":8,"power":9,"cost":210},{"id":3,"name":"Yelmo del juramento","slot":"helm","icon":9,"power":3,"cost":65}],"adventure":{"names":["Sombras en el camino","El tributo de las ruinas","Un convoy perdido","La promesa del vigía","Huellas bajo la luna","El eco de las cavernas","El sello quebrado","El último mensajero","La amenaza del barranco","Polvo y acero","El mapa del proscrito","Un juramento olvidado"],"horde":["Durotar","Los Baldíos","Sierra Espolón","Desolace","Tierras Altas","Marismas del Norte"],"alliance":["Bosque de Elwynn","Páramos de Poniente","Montañas Crestagrana","Bosque del Ocaso","Tierras Altas","Marismas del Norte"],"enemies":["Saqueador del camino","Lobo de las colinas","Guardián ancestral","Hechicero proscrito","Acechador del barranco","Centinela de piedra"],"descriptions":["Protege a los viajeros y recupera los suministros antes de que caiga la noche.","Un antiguo sello ha despertado. Explora las ruinas y enfrenta a su guardián.","Los exploradores han encontrado huellas extrañas. Sigue el rastro y despeja la ruta.","Un mensajero necesita cruzar la frontera. Asegúrate de que su misión llegue a buen puerto."],"profiles":[{"name":"Experiencia","cost":5,"xp":1.35,"gold":0.8,"difficulty":0.65,"loot":0.08},{"name":"Oro","cost":8,"xp":0.8,"gold":1.45,"difficulty":0.72,"loot":0.08},{"name":"Exploración","cost":10,"xp":1,"gold":1,"difficulty":0.8,"loot":0.25}]}}$catalog$::jsonb$$;
@@ -163,12 +170,14 @@ begin
    select value,ord from jsonb_array_elements((select jsonb_agg(x->'name' order by ord) from jsonb_array_elements(h->'offers') with ordinality e(x,ord))||coalesce(h->'recent_names','[]')) with ordinality e(value,ord) order by ord limit 6)t;
   h:=h||jsonb_build_object('active',null,'recent_names',available,'offer_seed',realm_private.c1_next((h->>'offer_seed')::bigint));
  elsif action='buy' then
-  select x into item from jsonb_array_elements(c->'items') x where x->>'id'=v;
+  if jsonb_typeof(arg) is distinct from 'number' then raise exception 'Objeto no disponible.';end if;
+  select x into item from jsonb_array_elements(c->'items') x where x->'id'=arg;
   if item is null or (h->'inventory')@>jsonb_build_array(item->'id') then raise exception 'Objeto no disponible.';end if;
   cost:=(item->>'cost')::int;if (h->>'gold')::bigint<cost then raise exception 'No tienes suficiente oro.';end if;
   h:=h||jsonb_build_object('gold',(h->>'gold')::bigint-cost,'inventory',(h->'inventory')||jsonb_build_array(item->'id'));msg:='Has comprado '||(item->>'name')||'.';
  elsif action='equip' then
-  select x into item from jsonb_array_elements(c->'items') x where x->>'id'=v;
+  if jsonb_typeof(arg) is distinct from 'number' then raise exception 'No tienes ese objeto.';end if;
+  select x into item from jsonb_array_elements(c->'items') x where x->'id'=arg;
   if item is null or not (h->'inventory')@>jsonb_build_array(item->'id') then raise exception 'No tienes ese objeto.';end if;
   h:=jsonb_set(h,array['equipped',item->>'slot'],item->'id');msg:='Equipo actualizado.';
  elsif action='train' then

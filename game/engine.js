@@ -34,9 +34,9 @@ export function settle(input,action,arg,now=Date.now(),seed=freshSeed(),requestI
     if(won&&randomSource(nextSeed(h.active.battle_seed))()<q.lootChance){const available=items.filter(i=>!h.inventory.includes(i.id));if(available.length){const i=available[h.active.battle_seed%available.length];h.inventory.push(i.id);message+=' · Botín: '+i.name;}else{h.gold+=20;message+=' · +20 oro por el botín.';}}
     h.recent_names=[...h.offers.map(q=>q.name),...(h.recent_names||[])].slice(0,6);h.active=null;h.offer_seed=nextSeed(h.offer_seed);
   }else if(action==='buy'){
-    const i=items.find(i=>i.id===Number(arg));if(!i||h.inventory.includes(i.id))throw Error('Objeto no disponible.');if(h.gold<i.cost)throw Error('No tienes suficiente oro.');h.gold-=i.cost;h.inventory.push(i.id);message='Has comprado '+i.name+'.';
+    const i=Number.isInteger(arg)?items.find(i=>i.id===arg):null;if(!i||h.inventory.includes(i.id))throw Error('Objeto no disponible.');if(h.gold<i.cost)throw Error('No tienes suficiente oro.');h.gold-=i.cost;h.inventory.push(i.id);message='Has comprado '+i.name+'.';
   }else if(action==='equip'){
-    const i=items.find(i=>i.id===Number(arg));if(!i||!h.inventory.includes(i.id))throw Error('No tienes ese objeto.');h.equipped[i.slot]=i.id;message='Equipo actualizado.';
+    const i=Number.isInteger(arg)?items.find(i=>i.id===arg):null;if(!i||!h.inventory.includes(i.id))throw Error('No tienes ese objeto.');h.equipped[i.slot]=i.id;message='Equipo actualizado.';
   }else if(action==='train'){
     if(!Object.hasOwn(attributes,arg))throw Error('Atributo desconocido.');const cost=h[arg]*3;if(h.gold<cost)throw Error('No tienes suficiente oro.');h.gold-=cost;h[arg]++;message='Entrenamiento completado.';
   }else if(action==='dungeon'||action==='arena'){

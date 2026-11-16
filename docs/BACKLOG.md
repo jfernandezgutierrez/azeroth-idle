@@ -4,17 +4,17 @@ Estados: pendiente, en curso, completada. La documentación no cierra tareas de 
 
 | ID | Estado | Entrega | Depende de | Aceptación |
 | --- | --- | --- | --- | --- |
-| F0 01 | Pendiente | Inventario y protección de datos | Prototipo | Esquema y cuentas inspeccionados; exportación o respaldo verificable |
-| F0 02 | Pendiente | Entorno de pruebas separado | F0 01 | Configuración aislada y sin secretos en cliente |
-| F0 03 | Pendiente | Versiones de reglas y contratos | F0 01 | Configuración validada y resultado versionado |
-| F0 04 | Pendiente | Migración compatible | F0 03 | Partidas antiguas conservan valor y propiedad |
-| F1 01 | Pendiente | Cinco atributos y clases | F0 03 | Desglose correcto y efecto de cada atributo |
-| F1 02 | Pendiente | Combate por turnos | F1 01 | Determinista; vida, críticos, defensas y final válidos |
-| F1 03 | Pendiente | Repetición del combate | F1 02 | Registro corresponde al resultado y puede saltarse |
-| F1 04 | Pendiente | Ofertas generadas por nivel | F0 03 | Tres ofertas distintas y sin cambio por recarga |
-| F1 05 | Pendiente | Aventura diaria y tiempo | F1 04 | Reinicio único con zona horaria y reloj del servidor |
-| F1 06 | Pendiente | Inicio y cobro transaccionales | F1 02 y F1 05 | Snapshot, espera y premio único bajo concurrencia |
-| F1 07 | Pendiente | Tutorial del bucle clásico | F1 06 | Crear, misión, combate, mejora sin ayuda externa |
+| F0 01 | Completada | Inventario y protección de datos | Prototipo | Cero cuentas iniciales; esquema conservado y copia privada para datos antiguos |
+| F0 02 | Completada | Entorno de pruebas separado | F0 01 | PostgreSQL 17 efímero en CI, sin acceso a producción |
+| F0 03 | Completada | Versiones de reglas y contratos | F0 01 | classic-1 validado y paridad JS SQL comprobada |
+| F0 04 | Completada | Migración compatible | F0 03 | Conversión local y SQL conserva saldo, objetos y misión |
+| F1 01 | Completada | Cinco atributos y clases | F0 03 | Fichas, entrenamiento y efectos probados |
+| F1 02 | Completada | Combate por turnos | F1 01 | Determinismo, probabilidades y límites probados |
+| F1 03 | Completada | Repetición del combate | F1 02 | Registro, vida, aceleración y salto comprobados |
+| F1 04 | Completada | Ofertas generadas por nivel | F0 03 | Tres perfiles persistentes y exclusión de nombres recientes |
+| F1 05 | Completada | Aventura diaria y tiempo | F1 04 | Reposición diaria y cambios de hora probados |
+| F1 06 | Completada | Inicio y cobro transaccionales | F1 02 y F1 05 | Contrato, premio único, recibos y prueba paralela |
+| F1 07 | En curso | Tutorial del bucle clásico | F1 06 | Guía inicial disponible; falta recorrido contextual persistente |
 | F2 01 | Pendiente | Objetos como instancias | F0 04 | Propiedad, ranuras y mochila probadas |
 | F2 02 | Pendiente | Rarezas y presupuestos | F2 01 | Generación dentro de límites por nivel |
 | F2 03 | Pendiente | Tiendas persistentes | F2 02 | Precios y renovación validados por servidor |

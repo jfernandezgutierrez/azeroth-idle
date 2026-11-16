@@ -7,10 +7,13 @@ Actualizado: 16 de noviembre de 2026.
 - Prototipo v0.1 en commit `5f07f7f`: dos facciones, tres clases, tres misiones fijas, comparación de poder, cuatro objetos, guardado local y acciones validadas en Supabase.
 - Pruebas del prototipo: cinco casos de motor, sintaxis y CI correctos. Pruebas SQL revertidas de propiedad, compra, equipo, cobro, reloj y RLS.
 - Plan maestro v1.0, matriz de fidelidad, tareas y protocolo de continuidad. El Word se genera desde la fuente Markdown.
+- Núcleo clásico v0.2 desarrollado en `1108c69` y completado con pruebas de migración y restricciones de acceso. Cinco atributos, combate por turnos, repetición, ofertas por nivel, aventura diaria y API idempotente. Backend actualizado en Supabase.
+- Veinte pruebas JS correctas. Doce fichas y ofertas, treinta y seis combates y veintiocho acciones coinciden entre JS y SQL. Pruebas de conversión de partida antigua, permisos y reconciliación económica correctas dentro de transacciones revertidas.
+- CI aislado en PostgreSQL 17 correcto en la ejecución `43838688348`, incluida la prueba de doce solicitudes simultáneas con un solo gasto y una sola mejora.
 
 ## En curso
 
-Entrega v0.2 del núcleo clásico. Implementados cinco atributos, combate por turnos, repetición, ofertas escaladas persistentes, aventura diaria, conversión de partidas y comandos idempotentes. Veinte pruebas JS correctas. Paridad comprobada en Supabase dentro de transacciones revertidas con doce fichas y ofertas, treinta y seis combates y veintiocho acciones. Pendiente completar CI aislado y publicar el nuevo backend.
+Integrar los últimos ajustes de seguridad y documentación en la rama principal, comprobar su CI y etiquetar v0.2.0. No se considera entregado todo el juego ni cerrada la fase F1 mientras falte el tutorial contextual completo.
 
 Revisión en navegador: práctica anterior conservada, cinco atributos visibles, combate de arena, misión aceptada y conservada tras recargar, cobro al finalizar, victoria y nivel 2, nuevas ofertas escaladas y persistencia de la recompensa.
 
@@ -18,7 +21,7 @@ El Word y la planificación ya están subidos en el commit `0352c26`. Su revisi�
 
 ## Siguiente entrega
 
-Completar la publicación y verificación de v0.2. Después F2 01 a F2 03: objetos como instancias con nivel, rareza y presupuesto, mochila y tiendas persistentes escalables. No iniciar gremios o fortaleza antes de estabilizar esta economía.
+F1 07: convertir la guía inicial en un recorrido contextual con avance persistente. Después F2 01 a F2 03: objetos como instancias con nivel, rareza y presupuesto, mochila y tiendas persistentes escalables. No iniciar gremios o fortaleza antes de estabilizar esta economía.
 
 ## Límites
 

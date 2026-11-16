@@ -31,6 +31,13 @@ alter table realm_private.commands enable row level security;
 alter table realm_private.ledger enable row level security;
 alter table realm_private.legacy_snapshot enable row level security;
 revoke all on realm_private.characters,realm_private.commands,realm_private.ledger,realm_private.legacy_snapshot from public,anon,authenticated;
+do $policies$ declare table_name text;begin
+ foreach table_name in array array['characters','commands','ledger','legacy_snapshot'] loop
+  if not exists(select 1 from pg_catalog.pg_policies p where p.schemaname='realm_private' and p.tablename=table_name and p.policyname='no_direct_player_access') then
+   execute format('create policy no_direct_player_access on realm_private.%I for all to anon,authenticated using(false) with check(false)',table_name);
+  end if;
+ end loop;
+end $policies$;
 
 create or replace function realm_private.c1_catalog() returns jsonb
 language sql immutable security invoker set search_path='' as $$select __CATALOG__::jsonb$$;
@@ -163,12 +170,14 @@ begin
    select value,ord from jsonb_array_elements((select jsonb_agg(x->'name' order by ord) from jsonb_array_elements(h->'offers') with ordinality e(x,ord))||coalesce(h->'recent_names','[]')) with ordinality e(value,ord) order by ord limit 6)t;
   h:=h||jsonb_build_object('active',null,'recent_names',available,'offer_seed',realm_private.c1_next((h->>'offer_seed')::bigint));
  elsif action='buy' then
-  select x into item from jsonb_array_elements(c->'items') x where x->>'id'=v;
+  if jsonb_typeof(arg) is distinct from 'number' then raise exception 'Objeto no disponible.';end if;
+  select x into item from jsonb_array_elements(c->'items') x where x->'id'=arg;
   if item is null or (h->'inventory')@>jsonb_build_array(item->'id') then raise exception 'Objeto no disponible.';end if;
   cost:=(item->>'cost')::int;if (h->>'gold')::bigint<cost then raise exception 'No tienes suficiente oro.';end if;
   h:=h||jsonb_build_object('gold',(h->>'gold')::bigint-cost,'inventory',(h->'inventory')||jsonb_build_array(item->'id'));msg:='Has comprado '||(item->>'name')||'.';
  elsif action='equip' then
-  select x into item from jsonb_array_elements(c->'items') x where x->>'id'=v;
+  if jsonb_typeof(arg) is distinct from 'number' then raise exception 'No tienes ese objeto.';end if;
+  select x into item from jsonb_array_elements(c->'items') x where x->'id'=arg;
   if item is null or not (h->'inventory')@>jsonb_build_array(item->'id') then raise exception 'No tienes ese objeto.';end if;
   h:=jsonb_set(h,array['equipped',item->>'slot'],item->'id');msg:='Equipo actualizado.';
  elsif action='train' then

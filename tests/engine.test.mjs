@@ -41,6 +41,7 @@ test('los cinco atributos se entrenan y conservan el estado de entrada',()=>{
  const h=hero(),r=settle(h,'train',key,time,123);assert.equal(r.hero[key],h[key]+1);assert.equal(h.gold,150);assert.equal(r.hero.gold,150-h[key]*3);
  }
  assert.throws(()=>settle(hero(),'train','gold',time,123));assert.throws(()=>createHero('x','other','warrior',time,123));
+ assert.throws(()=>settle(hero(),'buy',null,time,123));assert.throws(()=>settle(hero(),'buy','0',time,123));
 });
 test('niveles: experiencia sobrante y mejora de todos los atributos',()=>{
  const h=hero();h.xp=xpRequired(1)+xpRequired(2)+17;const r=settle(h,'get',null,time,123).hero;

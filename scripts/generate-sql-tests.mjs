@@ -73,6 +73,22 @@ do $test$ declare gold bigint;balance bigint;begin
  assert gold=balance,'ledger does not reconcile';
 end $test$;
 select set_config('request.jwt.claim.sub','',true);
+insert into auth.users(id) values('40000000-0000-4000-8000-000000000004');
+insert into public.realm_heroes(user_id,name,faction,job,level,xp,gold,energy,strength,stamina,luck,inventory,equipped,active)
+ values('40000000-0000-4000-8000-000000000004','Legacy','alliance','mage',3,21,456,60,14,14,5,'[0,1]','{"weapon":0}','{"id":0,"ends":12345}');
+select set_config('request.jwt.claim.sub','40000000-0000-4000-8000-000000000004',true);
+set local role authenticated;
+do $test$ declare r jsonb;begin
+ r:=public.realm_command('get','null',null);
+ assert r->'hero'->>'gold'='456','migration lost gold';
+ assert r->'hero'->>'xp'='21','migration lost experience';
+ assert r->'hero'->'inventory'='[0,1]'::jsonb,'migration lost items';
+ assert r->'hero'->'active'->>'ends'='12345','migration lost mission';
+ assert r->'hero'->>'dexterity'='14','migration missing attribute';
+ begin perform public.realm_command('create','{"name":"Other","faction":"horde","job":"warrior"}','44444444-4444-4444-8444-444444444444');raise exception 'duplicate character accepted';exception when raise_exception then if sqlerrm='duplicate character accepted' then raise;end if;end;
+end $test$;
+reset role;
+select set_config('request.jwt.claim.sub','',true);
 set local role anon;
 do $test$ begin assert not has_function_privilege(current_user,'public.realm_command(text,jsonb,uuid)','execute'),'anonymous command callable';end $test$;
 reset role;
