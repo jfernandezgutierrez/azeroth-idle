@@ -6,6 +6,8 @@ En una instalación vacía, aplicar por orden `supabase/schema.sql`, `supabase/c
 
 La guía se aplica siempre después del núcleo clásico. Su función pública delega en una capa de tutorial que conserva las reglas económicas congeladas. No renombra ni modifica el motor `classic-1`. La capa de guía puede repetirse y no crea recompensas ni modifica saldos.
 
+Con usuarios activos, preparar una sola transacción que contenga los scripts necesarios, suprimiendo sus BEGIN y COMMIT internos, y confirmar únicamente al finalizar todos. Esto evita un intervalo entre la revocación de permisos del núcleo y la instalación de la capa pública correspondiente. Ensayar primero el mismo lote con ROLLBACK.
+
 La actualización no elimina realm_heroes ni sobrescribe sus filas. Guarda una copia privada de las partidas iniciales y crea tablas privadas de estado, comandos y movimientos. La conversión se realiza al primer acceso. La API antigua deja de aceptar mutaciones para impedir dos economías independientes.
 
 El 16 de noviembre de 2026 se comprobó que el proyecto tenía cero cuentas, cero personajes y cero misiones activas antes de la actualización. Las pruebas posteriores utilizan datos sintéticos dentro de transacciones revertidas; nunca se exportan datos reales al repositorio.

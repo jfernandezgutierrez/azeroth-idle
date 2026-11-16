@@ -12,10 +12,12 @@ Actualizado: 16 de noviembre de 2026.
 - CI aislado en PostgreSQL 17 correcto en la ejecución `43838688348`, incluida la prueba de doce solicitudes simultáneas con un solo gasto y una sola mejora.
 - Versión v0.2.0 integrada en main y etiquetada en `6d50c62`; segunda verificación completa correcta en `43841048303`.
 - Guía contextual v0.2.1 implementada con progreso persistente y una capa separada que no altera las reglas económicas classic-1. Veintitrés pruebas JS correctas y pruebas SQL específicas de avance, reintentos y conservación de saldo.
+- Guía desarrollada en `87d8e67`, CI completo correcto en `43842801170` y backend de guía actualizado en Supabase. Pruebas SQL revertidas correctas; la revisión de seguridad no devuelve avisos. No se han dejado cuentas sintéticas en el proyecto.
+- F0 y F1 cerradas como fases de núcleo: no equivalen al lanzamiento del producto completo. F2 a F6 siguen pendientes.
 
 ## En curso
 
-Publicar y verificar la guía persistente v0.2.1 en Supabase y GitHub. La fase F1 dispone de sus funciones de núcleo y tutorial; el producto completo todavía requiere las fases restantes.
+Preparada la siguiente fase de equipo y economía. La entrega de núcleo y guía está en la rama principal con las etiquetas v0.2.0 y v0.2.1. No se ha iniciado todavía la implementación de F2.
 
 Revisión en navegador: práctica anterior conservada, cinco atributos visibles, combate de arena, misión aceptada y conservada tras recargar, cobro al finalizar, victoria y nivel 2, nuevas ofertas escaladas y persistencia de la recompensa.
 
