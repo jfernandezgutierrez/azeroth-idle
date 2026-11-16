@@ -14,6 +14,7 @@ Actualizado: 16 de noviembre de 2026.
 - Guía contextual v0.2.1 implementada con progreso persistente y una capa separada que no altera las reglas económicas classic-1. Veintitrés pruebas JS correctas y pruebas SQL específicas de avance, reintentos y conservación de saldo.
 - Guía desarrollada en `87d8e67`, CI completo correcto en `43842801170` y backend de guía actualizado en Supabase. Pruebas SQL revertidas correctas; la revisión de seguridad no devuelve avisos. No se han dejado cuentas sintéticas en el proyecto.
 - F0 y F1 cerradas como fases de núcleo: no equivalen al lanzamiento del producto completo. F2 a F6 siguen pendientes.
+- Automatización de GitHub actualizada a acciones oficiales v7 fijadas por commit y Ubuntu 24.04, con límite de ejecución y cancelación de comprobaciones sustituidas. Evita depender de la transición automática de ubuntu-latest y del runtime antiguo de las acciones v4.
 
 ## En curso
 
