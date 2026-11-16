@@ -36,7 +36,7 @@ Completar F2 04 con reciclaje y política definitiva de bandeja, y continuar F2 
 
 ## Límites
 
-- No hay versión pública alojada.
+- Prototipo público en https://jfernandezgutierrez.github.io/azeroth-idle/. No equivale a una beta profesional validada.
 - El registro real de una cuenta por correo no se ha comprobado de principio a fin; las funciones online sí se probaron en transacciones revertidas.
 - No se ha validado carga, restauración de copias ni ritmo de progreso largo.
 - La arena sigue siendo entrenamiento contra NPC. La primera tienda nueva combina equipo físico y mágico; no incluye todavía consumibles, gemas o servicios de herrero.
@@ -52,7 +52,7 @@ Petición de publicar la web priorizada sobre la siguiente entrega de inventario
 
 Preparado empaquetado de 24 archivos del juego, con rutas relativas compatibles con /azeroth-idle/. Excluye documentos, SQL, herramientas, pruebas y archivos de entorno del alojamiento estático. El repositorio público sí contiene documentación e historial, conforme a la autorización.
 
-38 pruebas locales correctas, sintaxis, catálogos y SQL generado comprobados. Se revisaron diez commits con patrones de credenciales privadas sin coincidencias; esta revisión no es una garantía exhaustiva. Publicación automática tras el éxito del flujo Comprobar juego en main, fijada al commit comprobado. Verificación pública pendiente hasta finalizar la primera ejecución.
+38 pruebas locales correctas, sintaxis, catálogos y SQL generado comprobados. Se revisaron diez commits con patrones de credenciales privadas sin coincidencias; esta revisión no es una garantía exhaustiva. Publicación automática tras el éxito del flujo Comprobar juego en main, fijada al commit comprobado. Primera publicación correcta del commit 15af3f0: pruebas completas en GitHub 43858935351 y despliegue 43859005429. Portada HTTP 200 y los 24 archivos públicos coinciden byte a byte con el commit de GitHub, incluidas las tres imágenes. La comparación utiliza el contenido del commit para evitar diferencias de finales de línea de Windows.
 
 No se han implementado reciclaje, campañas ni mejoras de inventario en esta entrega. Se mantienen las siguientes tareas de F2 y los límites de revisión visual y registro real por correo.
 

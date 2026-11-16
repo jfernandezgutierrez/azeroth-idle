@@ -66,5 +66,5 @@ Dirección: https://jfernandezgutierrez.github.io/azeroth-idle/
 
 El flujo Publicar web despliega automáticamente después de que Comprobar juego termine correctamente en main. Publica exactamente el commit comprobado. Genera la web con npm run build:pages en tmp/pages, una carpeta que debe estar vacía o no existir. Solo se incluyen los archivos necesarios para jugar, con rutas relativas. No se publican documentos o SQL en el alojamiento estático; el repositorio es público por autorización del propietario.
 
-La publicación inicial está pendiente de verificación; consultar docs/PROGRESS.md para su resultado. La práctica funciona por separado del progreso online. Publicar este prototipo no cierra la fase de lanzamiento profesional.
+Publicación inicial verificada: portada y 24 archivos correctos; consultar docs/PROGRESS.md para la evidencia. La práctica funciona por separado del progreso online. Publicar este prototipo no cierra la fase de lanzamiento profesional.
 
