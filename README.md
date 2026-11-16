@@ -2,6 +2,12 @@
 
 Prototipo jugable de RPG incremental en español inspirado en el bucle de misiones de Shakes & Fidget y la fantasía de Warcraft. Proyecto de aficionados sin afiliación con Blizzard ni Playa Games. No es una reproducción completa de ninguno de esos juegos.
 
+## Plan del juego completo
+
+El [plan maestro en Word](docs/Plan_maestro_Azeroth_Idle.docx) define la jugabilidad, el escalado automático, los sistemas, la arquitectura y las fases de producción. Su revisión visual está pendiente; el contenido también puede consultarse en [la fuente de texto](docs/MASTER_PLAN.md).
+
+Para continuar el desarrollo, consultar [el estado actual](docs/PROGRESS.md), [las tareas y sus dependencias](docs/BACKLOG.md) y [la matriz de fidelidad](docs/FIDELITY.md). Las instrucciones de continuidad están en [AGENTS.md](AGENTS.md). El plan describe el producto objetivo; no implica que todos esos sistemas estén implementados.
+
 ## Jugar
 
 Con Node.js 22 o posterior: `npm run dev`, abrir http://127.0.0.1:4173. No hay dependencias que instalar ni proceso de compilación. También funciona en cualquier alojamiento estático HTTPS. No abrir index.html directamente desde el explorador: los módulos necesitan un servidor HTTP.
