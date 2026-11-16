@@ -49,3 +49,5 @@ Estados: pendiente, en curso, completada. La documentación no cierra tareas de 
 | F6 05 | Pendiente | Copias y restauración | F0 02 | Restauración ensayada y objetivos medidos |
 | F6 06 | Pendiente | Carga y pruebas prolongadas | Todas las fases de juego | Objetivo de usuarios y progreso validados |
 | F6 07 | Pendiente | Despliegue beta y lanzamiento | F6 01 a F6 06 | URL comprobada, recuperación y cero fallos críticos |
+
+Publicación del prototipo: GitHub Pages configurado por petición expresa. No cierra F6 07, que requiere beta validada, recuperación y el resto de criterios de lanzamiento. Reciclaje y campañas siguen pendientes.

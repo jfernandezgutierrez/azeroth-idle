@@ -17,3 +17,5 @@
 - D013: cuatro rarezas iniciales y veintiuna plantillas. Las piezas legendarias, afijos especiales y servicios de herrero corresponden a fases posteriores. La primera armería agrupa equipo de la clase, incluidos báculos; no se anuncia una tienda de consumibles terminada.
 - D014: el Guerrero bloquea con un escudo equipado. La conversión entrega un broquel sin estadísticas ni valor de venta para conservar el bloqueo que ya tenía la clase. Las misiones pendientes conservan su ficha anterior; no se recalculan con el equipo nuevo.
 - D015: v0.3 usa realm_command_v3. La API anterior solicita recarga para evitar escrituras con el inventario antiguo. Los motores y contratos classic-1 se conservan y el equipo genera fichas compatibles con ese combate.
+
+- D016: publicación del prototipo en GitHub Pages autorizada expresamente por Javier, incluido hacer público el repositorio, su documentación e historial. La web se empaqueta con una lista de archivos de ejecución; se despliega el mismo commit cuya comprobación completa acaba correctamente en main. No se contratan servicios.

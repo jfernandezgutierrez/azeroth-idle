@@ -45,3 +45,14 @@ Completar F2 04 con reciclaje y política definitiva de bandeja, y continuar F2 
 ## Protocolo de cierre de cada entrega
 
 Registrar commit o versión, funciones jugables, pruebas, cambios de datos, estado de despliegue, límites y siguiente tarea. Si el trabajo se interrumpe, dejar aquí el estado exacto para continuar sin depender del chat.
+
+## Publicación GitHub Pages · 16 de noviembre de 2026
+
+Petición de publicar la web priorizada sobre la siguiente entrega de inventario. Javier autoriza expresamente abrir el repositorio después de que GitHub rechazara Pages con el plan privado actual. Repositorio público y Pages activado, HTTPS obligatorio.
+
+Preparado empaquetado de 24 archivos del juego, con rutas relativas compatibles con /azeroth-idle/. Excluye documentos, SQL, herramientas, pruebas y archivos de entorno del alojamiento estático. El repositorio público sí contiene documentación e historial, conforme a la autorización.
+
+38 pruebas locales correctas, sintaxis, catálogos y SQL generado comprobados. Se revisaron diez commits con patrones de credenciales privadas sin coincidencias; esta revisión no es una garantía exhaustiva. Publicación automática tras el éxito del flujo Comprobar juego en main, fijada al commit comprobado. Verificación pública pendiente hasta finalizar la primera ejecución.
+
+No se han implementado reciclaje, campañas ni mejoras de inventario en esta entrega. Se mantienen las siguientes tareas de F2 y los límites de revisión visual y registro real por correo.
+

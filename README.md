@@ -59,3 +59,12 @@ Reciclaje, servicios de herrero, gemas, consumibles, campañas con llaves, más 
 `assets/cities.png`: atlas de dos capitales. `assets/sprites.png`: atlas transparente 4 × 3 con seis personajes, cuatro objetos y dos enemigos. Generados con la herramienta integrada de imágenes. Especificaciones de generación en `assets/prompts.md`.
 
 `assets/gear.png`: doce iconos nuevos de armas, armaduras, joyería y escudo. La revisión visual de las nuevas pantallas de v0.3 queda pendiente por una incidencia del entorno del navegador; sí pasan las pruebas de sus plantillas, comparación y escapado de texto.
+
+## Web en GitHub Pages
+
+Dirección: https://jfernandezgutierrez.github.io/azeroth-idle/
+
+El flujo Publicar web despliega automáticamente después de que Comprobar juego termine correctamente en main. Publica exactamente el commit comprobado. Genera la web con npm run build:pages en tmp/pages, una carpeta que debe estar vacía o no existir. Solo se incluyen los archivos necesarios para jugar, con rutas relativas. No se publican documentos o SQL en el alojamiento estático; el repositorio es público por autorización del propietario.
+
+La publicación inicial está pendiente de verificación; consultar docs/PROGRESS.md para su resultado. La práctica funciona por separado del progreso online. Publicar este prototipo no cierra la fase de lanzamiento profesional.
+
