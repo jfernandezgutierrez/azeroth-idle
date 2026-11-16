@@ -5,7 +5,7 @@ const storage=()=>{const map=new Map();return{getItem:k=>map.get(k)||null,setIte
 const response=(data,status=200)=>({ok:status>=200&&status<300,status,json:async()=>data});
 function setup(fetcher,expires=100000){const s=storage();s.setItem('azeroth-session',JSON.stringify({user:{id:'owner'},access_token:'test-access',refresh_token:'test-refresh',expires_at:expires}));return new RealmClient({url:'https://test.invalid',key:'test-public',storage:s,fetcher,clock:()=>1000});}
 test('network retry reuses a command ID and clears pending only after success',async()=>{
- const bodies=[];const c=setup(async(_url,r)=>{bodies.push(JSON.parse(r.body));if(bodies.length===1)throw new TypeError('offline');return response({hero:{gold:50},server_time:1500});});
+ const bodies=[];const c=setup(async(url,r)=>{assert.ok(url.endsWith('/realm_command_v3'));bodies.push(JSON.parse(r.body));if(bodies.length===1)throw new TypeError('offline');return response({hero:{gold:50},server_time:1500});});
  const result=await c.command('buy',0);assert.equal(result.hero.gold,50);assert.equal(bodies[0].request_id,bodies[1].request_id);assert.equal(c.pending,null);assert.equal(c.offset,500);
 });
 test('uncertain command survives reload and blocks unrelated mutations',async()=>{

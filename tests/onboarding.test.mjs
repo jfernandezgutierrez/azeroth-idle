@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {createHero,settle} from '../engine.js';
+import {createHero,settle} from '../game/legacy.js';
 const time=Date.parse('2026-11-16T10:00Z');
 const fresh=()=>createHero('Guide','alliance','mage',time,123);
 test('tutorial follows successful mission and subsequent improvement',()=>{
@@ -22,3 +22,4 @@ test('tutorial dismissal persists and stale retries cannot undo a restart',()=>{
 test('failed mission request does not advance tutorial',()=>{
  const h=fresh();assert.throws(()=>settle(h,'quest','bad-id',time,123));assert.equal(h.tutorial,undefined);
 });
+

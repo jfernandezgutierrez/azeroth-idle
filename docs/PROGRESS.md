@@ -18,7 +18,11 @@ Actualizado: 16 de noviembre de 2026.
 
 ## En curso
 
-Preparada la siguiente fase de equipo y economía. La entrega de núcleo y guía está en la rama principal con las etiquetas v0.2.0 y v0.2.1. No se ha iniciado todavía la implementación de F2.
+F2 01 a F2 03 en revisión para v0.3.0: instancias de equipo, nivel, cuatro rarezas, diez ranuras según clase, tienda diaria de seis ofertas, mochila de veinte piezas y bandeja de cincuenta. Compra, equipamiento, venta protegida, favoritos, filtros y comparación implementados. Falta completar CI y publicar el nuevo backend.
+
+Verificación local: 37 pruebas correctas, incluidos presupuestos de atributos, conversión sin pérdida de estadísticas, escudo equipado, compra repetida, propiedad, favoritos y botín en bandeja. Verificación SQL revertida: 144 objetos, tres conversiones, tres fichas, tres tiendas y 51 acciones coinciden con JS; las pruebas de API y propiedad entre cuentas también pasan.
+
+La revisión visual de v0.3 está pendiente. El navegador de pruebas no puede iniciar su entorno después de la actualización de herramientas. Se validaron plantillas HTML, escapado de nombres y comparación de atributos con pruebas; no se presenta eso como una revisión visual.
 
 Revisión en navegador: práctica anterior conservada, cinco atributos visibles, combate de arena, misión aceptada y conservada tras recargar, cobro al finalizar, victoria y nivel 2, nuevas ofertas escaladas y persistencia de la recompensa.
 
@@ -26,14 +30,14 @@ El Word y la planificación ya están subidos en el commit `0352c26`. Su revisi�
 
 ## Siguiente entrega
 
-F2 01 a F2 03: objetos como instancias con nivel, rareza y presupuesto, mochila y tiendas persistentes escalables. No iniciar gremios o fortaleza antes de estabilizar esta economía.
+Publicar v0.3.0 después de CI. Luego completar F2 04 con reciclaje y política definitiva de bandeja, y continuar F2 05 con campañas y llaves. No iniciar gremios o fortaleza antes de estabilizar esta economía.
 
 ## Límites
 
 - No hay versión pública alojada.
 - El registro real de una cuenta por correo no se ha comprobado de principio a fin; las funciones online sí se probaron en transacciones revertidas.
 - No se ha validado carga, restauración de copias ni ritmo de progreso largo.
-- El inventario actual aún tiene cuatro objetos de prototipo. La arena sigue siendo entrenamiento contra NPC.
+- La arena sigue siendo entrenamiento contra NPC. La primera tienda nueva combina equipo físico y mágico; no incluye todavía consumibles, gemas o servicios de herrero.
 - Los sistemas descritos como objetivo en el plan no están implementados salvo indicación expresa.
 
 ## Protocolo de cierre de cada entrega

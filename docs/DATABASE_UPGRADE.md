@@ -2,7 +2,7 @@
 
 ## Orden de instalación
 
-En una instalación vacía, aplicar por orden `supabase/schema.sql`, `supabase/classic_v1.sql` y `supabase/onboarding_v1.sql`. En el proyecto existente, aplicar las actualizaciones necesarias después de comprobar el estado y ejecutar las pruebas dentro de una transacción revertida. El núcleo clásico se compila con `npm run build:sql` y no se edita manualmente.
+En una instalación vacía, aplicar por orden `supabase/schema.sql`, `supabase/classic_v1.sql`, `supabase/onboarding_v1.sql` y `supabase/gear_v1.sql`. En el proyecto existente, aplicar las actualizaciones necesarias después de comprobar el estado y ejecutar las pruebas dentro de una transacción revertida. Los catálogos SQL clásico y de equipo se compilan con `npm run build:sql` y no se editan manualmente.
 
 La guía se aplica siempre después del núcleo clásico. Su función pública delega en una capa de tutorial que conserva las reglas económicas congeladas. No renombra ni modifica el motor `classic-1`. La capa de guía puede repetirse y no crea recompensas ni modifica saldos.
 
@@ -23,3 +23,9 @@ Las pruebas generan escenarios a partir del motor JS y comprueban igualdad compl
 La primera versión permanece accesible en Git, y sus tablas originales se conservan. Volver al cliente anterior después de que haya partidas v2 requiere una conversión inversa diseñada y probada; no se debe restaurar ciegamente la función antigua ni perder el progreso nuevo. La recuperación operativa completa y la restauración de copias son tareas pendientes de F6.
 
 No exponer realm_private mediante PostgREST. No conceder acceso directo de jugador a las tablas ni a los helpers de cálculo. No publicar claves secretas ni de servicio en config.js.
+
+## Equipo gear 1
+
+gear_v1.sql conserva una copia privada del estado anterior y convierte los objetos al acceder. No borra los campos antiguos: se conservan como archivo para compatibilidad y recuperación, pero la API anterior deja de modificarlos. Las instancias se identifican dentro de su personaje y se registran eventos de adquisición, venta, equipamiento y recogida.
+
+Antes de aplicar gear_v1, las pruebas de classic_v1 y onboarding_v1 deben ejecutarse contra sus contratos originales. Después se instala gear_v1 y se prueban el contrato v3 y las compras paralelas. El orden está automatizado en GitHub Actions. No volver a habilitar las APIs anteriores sobre un estado convertido sin una migración inversa probada.

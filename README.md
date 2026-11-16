@@ -20,7 +20,9 @@ Modo práctica: se guarda por navegador, separado del personaje online. Para el 
 - Tres clases y cinco atributos funcionales, entrenamiento, experiencia y niveles.
 - Tres ofertas de misión generadas por nivel con perfiles de experiencia, oro y exploración. Las ofertas y las condiciones aceptadas son persistentes.
 - Combate automático por turnos con vida, críticos, defensas de clase, furia y repetición guardada.
-- Cuatro objetos, compras, mochila y equipamiento por ranura.
+- Equipo individual con nivel, cuatro rarezas y veintiuna plantillas; nueve ranuras y escudo adicional para Guerrero.
+- Mochila de veinte piezas, favoritos, filtros, comparación, venta confirmada y bandeja de botín de cincuenta piezas.
+- Armería con seis ofertas persistentes, renovación diaria y renovación opcional con oro del juego.
 - Arena contra NPC, mazmorra progresiva y clasificación online.
 - Cien unidades de aventura por día, repuestas a medianoche de Madrid. Arena de entrenamiento y mazmorras usan esperas independientes.
 - Diseño adaptable a móvil y escritorio.
@@ -36,6 +38,8 @@ El cliente anterior debe recargar: no se permite mantener dos economías modific
 
 Aplicar `supabase/onboarding_v1.sql` después del núcleo clásico para activar la guía persistente. Esta capa mantiene las reglas `classic-1` y procesa el avance de la guía en la misma transacción que la acción del juego.
 
+Aplicar después `supabase/gear_v1.sql`, compilado desde su plantilla y catálogos compartidos. El cliente v0.3 usa `realm_command_v3`; el contrato anterior pide recargar. La conversión conserva las piezas antiguas y sus efectos, registra eventos de objetos y protege los premios cuando la mochila está llena. No hay caducidad de bandeja en esta primera versión.
+
 Las funciones privilegiadas están en `realm_private`, con search_path vacío, comprobación explícita de auth.uid y permisos de ejecución limitados. Las funciones públicas son envoltorios SECURITY INVOKER. No añadir realm_private a los esquemas expuestos por la API.
 
 Autenticación por correo y contraseña mediante Supabase Auth. Configurar Site URL/Redirect URLs y correo de producción en el panel antes de abrir un registro público a gran escala. La configuración de confirmación de correo se conserva.
@@ -48,8 +52,10 @@ Los archivos de `tests/bootstrap.sql` y el script de concurrencia son exclusivam
 
 ## Siguientes etapas
 
-Objetos como instancias con nivel y rareza, tiendas escalables, campañas, más clases y razas, gremios, PvP real, chat moderado, mascotas, monturas, fortaleza y eventos. El catálogo actual conserva cuatro objetos; no se presenta como una economía de equipo completa. Los sprites siguen siendo ilustraciones estáticas y la repetición usa barras de vida y registro de ataques.
+Reciclaje, servicios de herrero, gemas, consumibles, campañas con llaves, más clases y razas, gremios, PvP real, chat moderado, mascotas, monturas, fortaleza y eventos. La tienda inicial agrupa el equipo de cada clase; no se presenta como un sistema completo de comercio y servicios. Los sprites son ilustraciones estáticas y la repetición usa barras de vida y registro de ataques.
 
 ## Recursos visuales
 
 `assets/cities.png`: atlas de dos capitales. `assets/sprites.png`: atlas transparente 4 × 3 con seis personajes, cuatro objetos y dos enemigos. Generados con la herramienta integrada de imágenes. Especificaciones de generación en `assets/prompts.md`.
+
+`assets/gear.png`: doce iconos nuevos de armas, armaduras, joyería y escudo. La revisión visual de las nuevas pantallas de v0.3 queda pendiente por una incidencia del entorno del navegador; sí pasan las pruebas de sus plantillas, comparación y escapado de texto.

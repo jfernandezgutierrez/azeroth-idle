@@ -15,10 +15,10 @@ Estados: pendiente, en curso, completada. La documentación no cierra tareas de 
 | F1 05 | Completada | Aventura diaria y tiempo | F1 04 | Reposición diaria y cambios de hora probados |
 | F1 06 | Completada | Inicio y cobro transaccionales | F1 02 y F1 05 | Contrato, premio único, recibos y prueba paralela |
 | F1 07 | Completada | Tutorial del bucle clásico | F1 06 | Cuatro pasos persistentes, ocultación, reactivación y reintentos probados |
-| F2 01 | Pendiente | Objetos como instancias | F0 04 | Propiedad, ranuras y mochila probadas |
-| F2 02 | Pendiente | Rarezas y presupuestos | F2 01 | Generación dentro de límites por nivel |
-| F2 03 | Pendiente | Tiendas persistentes | F2 02 | Precios y renovación validados por servidor |
-| F2 04 | Pendiente | Venta reciclaje y bandeja | F2 01 | Sin pérdida silenciosa ni duplicación |
+| F2 01 | En curso | Objetos como instancias | F0 04 | Conversión, propiedad, ranuras y mochila probadas; falta publicación |
+| F2 02 | En curso | Rarezas y presupuestos | F2 01 | Cuatro rarezas con presupuestos probados; falta publicación |
+| F2 03 | En curso | Tiendas persistentes | F2 02 | Seis ofertas diarias y renovación comprobadas; falta publicación |
+| F2 04 | En curso | Venta reciclaje y bandeja | F2 01 | Venta protegida y bandeja implementadas; reciclaje y política definitiva pendientes |
 | F2 05 | Pendiente | Campañas y llaves | F1 06 | Acceso y primera recompensa únicos |
 | F2 06 | Pendiente | Monturas y guardia | F1 05 | Exclusiones y duración correctas |
 | F2 07 | Pendiente | Herrero gemas y pociones | F2 04 | Consumo, efectos y expiración probados |

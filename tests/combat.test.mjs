@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {createHero,fighter,fight} from '../engine.js';
+import {createHero,fighter,fight} from '../game/legacy.js';
 import {nextSeed} from '../game/rules.js';
 test('criticals saturate at fifty percent and defenses match configured frequencies',()=>{
  const h=createHero('Sample','horde','warrior',0,123);h.luck=100000;

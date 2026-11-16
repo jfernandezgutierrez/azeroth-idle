@@ -1,4 +1,4 @@
-import {createHero,upgradeHero,settle,dayKey} from './engine.js';
+import {createHero,upgradeHero,settle,dayKey,refreshCost} from './engine.js';
 import {SUPABASE_URL,SUPABASE_KEY} from './config.js';
 import {RealmClient} from './api.js';
 import {esc,duration} from './ui/html.js';
@@ -8,6 +8,7 @@ import {showBattle,finishReplay,accelerateReplay,restartReplay} from './ui/repla
 const $=s=>document.querySelector(s),client=new RealmClient({url:SUPABASE_URL,key:SUPABASE_KEY});
 const readPractice=()=>{try{return JSON.parse(localStorage.getItem('azeroth-practice')||'null');}catch{return null;}};
 let practice=!client.session,hero=practice?readPractice():null,view='city',busy=false,loading=!!client.session,faction=hero?.faction||'horde',toastTimer,nextDailyCheck=0;
+const uiState={bagFilter:'all',bagSort:'level'};
 if(hero){hero=upgradeHero(hero);hero=settle(hero,'get',null).hero;savePractice();}
 const now=()=>Date.now()+(practice?0:client.offset);
 function savePractice(){if(practice&&hero)localStorage.setItem('azeroth-practice',JSON.stringify(hero));}
@@ -15,7 +16,7 @@ function toast(message){$('#toast').textContent=message;$('#toast').classList.ad
 function modal(html){const dialog=$('#modal');if(dialog.open)dialog.close();dialog.innerHTML=`<button class="close" data-close aria-label="Cerrar">×</button>${html}`;dialog.showModal();}
 function render(){
   document.body.dataset.faction=hero?.faction||faction;
-  $('#app').innerHTML=loading?'<main class="creation"><h1>Entrando en los reinos</h1><p role="status">Recuperando tu personaje…</p></main>':hero?shell(hero,view,practice,now(),!practice&&client.pending):creation(faction,practice);
+  $('#app').innerHTML=loading?'<main class="creation"><h1>Entrando en los reinos</h1><p role="status">Recuperando tu personaje…</p></main>':hero?shell(hero,view,practice,now(),!practice&&client.pending,uiState):creation(faction,practice);
   if(!hero&&!practice&&client.pending&&!loading)$('#app').insertAdjacentHTML('afterbegin','<div class="connection-banner">Hay una acción pendiente. <button class="secondary" data-retry>Comprobar y continuar</button></div>');
   if(view==='ranking'&&hero)loadRanking();tick();
 }
@@ -24,7 +25,7 @@ async function action(type,arg=null,retry=false){
   document.querySelectorAll('[data-action]').forEach(b=>b.disabled=true);
   try{
     const result=practice?settle(hero,type,arg,now(),undefined,crypto.randomUUID()):retry?await client.retry():await client.command(type,arg);
-    hero=result.hero;savePractice();if(result.message)toast(result.message);if(type?.startsWith('tutorial_')&&$('#modal').open)$('#modal').close();render();
+    hero=result.hero;savePractice();if(result.message)toast(result.message);if((type?.startsWith('tutorial_')||['sell','shop_refresh'].includes(type))&&$('#modal').open)$('#modal').close();render();
     if(result.battle)showBattle(result.battle,hero,result.message,modal);
   }catch(error){toast(error.message);render();}
   finally{busy=false;}
@@ -46,7 +47,10 @@ document.addEventListener('click',async event=>{
   const b=event.target.closest('button');if(!b)return;
   if(b.hasAttribute('data-close'))$('#modal').close();
   if(b.dataset.view){view=b.dataset.view;render();}
-  if(b.dataset.action)await action(b.dataset.action,['buy','equip'].includes(b.dataset.action)?Number(b.dataset.arg):b.dataset.arg??null);
+  if(b.dataset.action)await action(b.dataset.action,b.dataset.arg??null);
+  if(b.dataset.bagFilter){uiState.bagFilter=b.dataset.bagFilter;render();}
+  if(b.hasAttribute('data-request-refresh'))modal(`<p class="eyebrow">NUEVAS EXISTENCIAS</p><h2>Renovar la armería</h2><p>Las seis ofertas actuales se sustituirán por otras adaptadas a tu nivel.</p><p>Coste: <b>${refreshCost(hero)} oro del juego</b>.</p><button class="primary" data-action="shop_refresh">Renovar por ${refreshCost(hero)} oro</button> <button class="secondary" data-close>Cancelar</button>`);
+  if(b.dataset.requestSell){const item=hero.bag.find(i=>i.id===b.dataset.requestSell);if(item)modal(`<p class="eyebrow">VENTA DE EQUIPO</p><h2>Vender objeto</h2><p>${esc(item.name)} · Nivel ${item.level}</p><p>Recibirás <b>${item.sellValue} oro</b>. El objeto saldrá de tu mochila.</p><button class="primary" data-action="sell" data-arg="${esc(item.id)}">Vender por ${item.sellValue} oro</button> <button class="secondary" data-close>Cancelar</button>`);}
   if(b.dataset.faction){faction=b.dataset.faction;document.body.dataset.faction=faction;document.querySelectorAll('[data-faction]').forEach(el=>el.classList.toggle('selected',el.dataset.faction===faction));}
   if(b.hasAttribute('data-auth'))authDialog();
   if(b.hasAttribute('data-help'))help();
@@ -79,5 +83,6 @@ document.addEventListener('submit',async event=>{
   }
 });
 render();setInterval(tick,1000);
+document.addEventListener('change',event=>{if(event.target.matches('[data-bag-sort]')){uiState.bagSort=event.target.value;render();}});
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&hero&&!busy&&!client.pending)action('get');});
 if(client.session){client.command('get').then(result=>{hero=result.hero;loading=false;render();}).catch(error=>{loading=false;render();toast(error.message);authDialog();});}

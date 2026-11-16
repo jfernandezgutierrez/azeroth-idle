@@ -26,14 +26,14 @@ export class RealmClient {
   async signIn(email,password,signup=false){const data=await this.transport(signup?'/auth/v1/signup':'/auth/v1/token?grant_type=password',{email,password},false);if(data.access_token)this.saveSession(data);return data;}
   async signOut(){try{if(this.session)await this.transport('/auth/v1/logout',{});}finally{this.session=null;this.pending=null;this.storage.removeItem('azeroth-session');this.storage.removeItem('azeroth-pending');}}
   async command(action,arg=null){
-    if(['get','refresh'].includes(action))return this.transport('/rest/v1/rpc/realm_command',{action,arg,request_id:null});
+    if(['get','refresh'].includes(action))return this.transport('/rest/v1/rpc/realm_command_v3',{action,arg,request_id:null});
     if(!this.session)throw Error('Necesitas entrar con tu cuenta.');
     if(this.pending&&(this.pending.action!==action||JSON.stringify(this.pending.arg)!==JSON.stringify(arg)))throw Error('Primero comprueba la acción que quedó pendiente de conexión.');
     const command=this.pending||{action,arg,request_id:globalThis.crypto.randomUUID(),owner:this.session.user.id};
     this.pending=command;this.storage.setItem('azeroth-pending',JSON.stringify(command));
     for(let attempt=0;attempt<2;attempt++){
       try{
-        const result=await this.transport('/rest/v1/rpc/realm_command',{action:command.action,arg:command.arg,request_id:command.request_id});
+        const result=await this.transport('/rest/v1/rpc/realm_command_v3',{action:command.action,arg:command.arg,request_id:command.request_id});
         this.pending=null;this.storage.removeItem('azeroth-pending');return result;
       }catch(error){
         if(error.retryable){if(attempt===0)continue;throw error;}
@@ -43,3 +43,4 @@ export class RealmClient {
   }
   retry(){if(!this.pending)throw Error('No hay acciones pendientes.');return this.command(this.pending.action,this.pending.arg);}
 }
+

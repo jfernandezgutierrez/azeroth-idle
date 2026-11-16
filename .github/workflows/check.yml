@@ -45,6 +45,8 @@ jobs:
           psql -h localhost -U postgres -v ON_ERROR_STOP=1 -f supabase/onboarding_v1.sql
           psql -h localhost -U postgres -v ON_ERROR_STOP=1 --single-transaction -f tmp/classic-tests.sql
           psql -h localhost -U postgres -v ON_ERROR_STOP=1 --single-transaction -f tests/onboarding.sql
+          psql -h localhost -U postgres -v ON_ERROR_STOP=1 -f supabase/gear_v1.sql
+          psql -h localhost -U postgres -v ON_ERROR_STOP=1 --single-transaction -f tmp/gear-tests.sql
       - name: Verify parallel command retries
         env:
           PGPASSWORD: postgres

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {createHero,settle,upgradeHero,fighter,fight,generateOffers,xpRequired,dayKey} from '../engine.js';
+import {createHero,settle,upgradeHero,fighter,fight,generateOffers,xpRequired,dayKey} from '../game/legacy.js';
 const time=Date.parse('2026-11-16T10:00:00Z');
 const hero=(job='warrior')=>createHero('Thraka','horde',job,time,78913);
 test('misión: contrato estable, espera real y cobro único',()=>{
@@ -72,3 +72,4 @@ test('migración local: conserva saldo, objetos y misión pendiente',()=>{
  const h=upgradeHero(old,time,123);assert.equal(h.gold,456);assert.equal(h.xp,21);assert.deepEqual(h.inventory,[0,1]);assert.equal(h.active.ends,time+20000);assert.equal(h.dexterity,14);
  assert.deepEqual(upgradeHero(h,time,999),h);
 });
+
