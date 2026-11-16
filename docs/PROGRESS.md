@@ -20,7 +20,7 @@ Actualizado: 16 de noviembre de 2026.
 
 ## En curso
 
-Entrega v0.3.0 preparada para integrar en main y etiquetar: instancias de equipo, nivel, cuatro rarezas, diez ranuras según clase, tienda diaria de seis ofertas, mochila de veinte piezas y bandeja de cincuenta. Compra, equipamiento, venta protegida, favoritos, filtros y comparación implementados. CI correcto y backend publicado.
+Entrega v0.3.0 integrada en main y etiquetada en `23b90e4`: instancias de equipo, nivel, cuatro rarezas, diez ranuras según clase, tienda diaria de seis ofertas, mochila de veinte piezas y bandeja de cincuenta. Compra, equipamiento, venta protegida, favoritos, filtros y comparación implementados. CI correcto y backend publicado. Las tareas F2 01 a F2 03 están completadas; F2 04 continúa en curso.
 
 Verificación local: 37 pruebas correctas, incluidos presupuestos de atributos, conversión sin pérdida de estadísticas, escudo equipado, compra repetida, propiedad, favoritos y botín en bandeja. Verificación SQL revertida: 144 objetos, tres conversiones, tres fichas, tres tiendas y 51 acciones coinciden con JS; las pruebas de API y propiedad entre cuentas también pasan.
 

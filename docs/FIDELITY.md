@@ -14,5 +14,6 @@ La referencia principal son las misiones clásicas. Consulta oficial: 16 de novi
 | Aventura diaria | Reposición a cien a medianoche documentada en Tavern | Cien unidades y reposición diaria en Madrid | Implementada con pruebas de cambio horario |
 | Facciones | Ambientación pedida por Javier | Capital distinta e igualdad económica | Ambas capitales disponibles |
 | Fórmulas | No se afirma paridad numérica | Coeficientes propios versionados y simulados | classic-1 con pruebas deterministas y estadísticas |
+| Equipo | Catálogo y presupuestos propios del proyecto | Instancias por personaje, nivel, rareza y elección de piezas | gear-1 con tienda persistente, mochila, favoritos y comparación; sin herrero todavía |
 
 La fidelidad se revisa sobre acciones y decisiones reales. Un aspecto visual parecido no acredita equivalencia de jugabilidad. Antes de añadir una desviación, registrar comportamiento, motivo y aceptación en DECISIONS.md.
